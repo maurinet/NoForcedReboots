@@ -65,6 +65,8 @@ namespace NoForcedReboots
 
             BuildTrayIcon();
 
+            EnsureStartupTaskOnFirstRun();
+
             // enforce immediately on launch so state is correct right away,
             // not just after the first hourly tick
             ShiftNow(showBalloon: false);
@@ -162,6 +164,19 @@ namespace NoForcedReboots
             catch (Exception ex)
             {
                 MessageBox.Show("Could not update the startup task: " + ex.Message,
+                    "NoForcedReboots", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        void EnsureStartupTaskOnFirstRun()
+        {
+            try
+            {
+                StartupTask.EnsureOnFirstRun(TaskName, Application.ExecutablePath);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Could not enable Start with Windows: " + ex.Message,
                     "NoForcedReboots", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }

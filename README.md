@@ -36,8 +36,9 @@ NoForcedReboots sits in the tray and does three things:
    - the current Active Hours window
    - whether a reboot is currently pending
    - **Shift active hours now** to force an immediate recalculation
-   - **Start with Windows** to toggle a Task Scheduler entry that launches
-     it elevated at logon (no UAC prompt every time)
+    - **Start with Windows** is enabled automatically on first launch and can
+      be toggled afterwards; it uses a Task Scheduler entry that launches it
+      elevated at logon (no UAC prompt every time)
 
 ## Requirements
 
@@ -70,8 +71,8 @@ Right-click the tray icon for:
   an install on next restart (read-only, informational)
 - **Shift active hours now** — recalculate immediately instead of waiting
   for the hourly tick
-- **Start with Windows** — check to launch automatically (elevated, no
-  prompt) at logon; uncheck to remove
+- **Start with Windows** — enabled automatically on first launch; uncheck to
+  stop launching automatically (elevated, no prompt) at logon
 - **Exit**
 
 ## What it actually touches
