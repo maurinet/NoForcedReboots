@@ -53,18 +53,10 @@ namespace NoForcedReboots
 
             int now = DateTime.Now.Hour;
 
-            // center the window on "now", clamped to a single day (0-23)
-            // rather than wrapping past midnight, since the active-hours
-            // registry values don't support an overnight wrap.
-            int start = now - range / 2;
-            if (start < 0) start = 0;
-            int end = start + range;
-            if (end > 23)
-            {
-                end = 23;
-                start = end - range;
-                if (start < 0) start = 0;
-            }
+            // Keep the configured span centered on "now", including when the
+            // window crosses midnight (for example, 18:00-12:00).
+            int start = (now - range / 2 + 24) % 24;
+            int end = (start + range) % 24;
 
             using (var key = Registry.LocalMachine.CreateSubKey(UxSettingsPath))
             {
